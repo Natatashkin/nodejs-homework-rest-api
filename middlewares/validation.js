@@ -2,7 +2,7 @@ const validation = (schema) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
 
-    if (!req._body) {
+    if (req.method === "PUT" && !req._body) {
       error.message = "missing fields of body";
     }
 
