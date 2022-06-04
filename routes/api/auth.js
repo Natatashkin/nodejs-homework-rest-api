@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.post("/signup", validation(joiSchema), ctrlWrapper(ctrl.signup));
 router.post("/login", validation(joiLoginSchema), ctrlWrapper(ctrl.login));
-router.get("/current", authCurrent, ctrlWrapper(ctrl.getCurrent));
 router.get("/logout", authCurrent, ctrlWrapper(ctrl.logout));
 
 module.exports = router;

@@ -2,14 +2,13 @@ const { User } = require("../../models");
 const { Conflict } = require("http-errors");
 
 const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, subscription } = req.body;
   const user = await User.findOne({ email });
   if (user) {
     throw new Conflict(`User with email ${email} already exist`);
   }
 
-  const newUser = new User({ name, email });
-  console.log(newUser.subscription);
+  const newUser = new User({ name, email, subscription });
   newUser.setPassword(password);
   newUser.save();
 
@@ -20,6 +19,7 @@ const signup = async (req, res) => {
       user: {
         name,
         email,
+        subscription,
       },
     },
   });

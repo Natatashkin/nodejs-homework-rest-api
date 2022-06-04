@@ -23,7 +23,6 @@ const userSchema = Schema(
       type: String,
       enum: ["starter", "pro", "business"],
       default: "starter",
-      validate: (v) => "enum".includes(v),
     },
     token: {
       type: String,
@@ -47,8 +46,7 @@ const joiSchema = Joi.object({
   email: Joi.string()
     .pattern(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/)
     .required(),
-  // subscription: Joi.string(),
-  // token: Joi.string(),
+  subscription: Joi.string().valid("starter", "pro", "business"),
 });
 
 const joiLoginSchema = Joi.object({
@@ -56,8 +54,10 @@ const joiLoginSchema = Joi.object({
   email: Joi.string()
     .pattern(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/)
     .required(),
-  subscription: Joi.string(),
-  token: Joi.string(),
+});
+
+const joiSubscriptionSchema = Joi.object({
+  subscription: Joi.string().valid("starter", "pro", "business"),
 });
 
 const User = model("user", userSchema);
@@ -66,4 +66,5 @@ module.exports = {
   User,
   joiSchema,
   joiLoginSchema,
+  joiSubscriptionSchema,
 };
