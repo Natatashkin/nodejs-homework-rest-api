@@ -21,10 +21,6 @@ const getAllContacts = async (req, res) => {
     });
   }
 
-  // if (favorite === "false") {
-  //   throw new NotFound("лісом!");
-  // }
-
   const contacts = await Contact.find({ owner: _id }, "", {
     skip: skip,
     limit: Number(limit),

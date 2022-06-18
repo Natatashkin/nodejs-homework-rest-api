@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", authCurrent, ctrlWrapper(ctrl.getAllContacts));
 
-router.get("/:contactId", ctrlWrapper(ctrl.getContactById));
+router.get("/:contactId", authCurrent, ctrlWrapper(ctrl.getContactById));
 
 router.post(
   "/",
@@ -17,16 +17,18 @@ router.post(
 
 router.put(
   "/:contactId",
+  authCurrent,
   validation(joiSchema),
   ctrlWrapper(ctrl.updateContactById)
 );
 
 router.patch(
   "/:contactId/favorite",
+  authCurrent,
   validation(joiStatusSchema),
   ctrlWrapper(ctrl.updateStatusContact)
 );
 
-router.delete("/:contactId", ctrlWrapper(ctrl.removeContact));
+router.delete("/:contactId", authCurrent, ctrlWrapper(ctrl.removeContact));
 
 module.exports = router;
