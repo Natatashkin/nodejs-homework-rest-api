@@ -14,7 +14,7 @@ const signup = async (req, res) => {
   newUser.setPassword(password);
   newUser.save();
 
-  res.status(201).json({
+  return res.status(201).json({
     status: "success",
     code: 201,
     data: {

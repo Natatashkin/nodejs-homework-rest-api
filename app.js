@@ -22,12 +22,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/contacts", contactsRouter);
 app.use("/api/users", usersRouter);
 
-// const avatars = [];
-
-// app.get("/api/users", async (req, res) => {
-//   res.json(avatars);
-// });
-
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
